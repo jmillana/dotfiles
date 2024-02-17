@@ -32,6 +32,9 @@ end, { desc = "Plugins Update" })
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to system clip" })
 vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Past from system clip" })
 vim.keymap.set({ "n", "v" }, "<leader>x", [["+x]], { desc = "Cut to system clip" })
+vim.keymap.set({ "n", "v" }, "Y", [["+y]], { desc = "Yank to system clip" })
+vim.keymap.set({ "n", "v" }, "P", [["+p]], { desc = "Past from system clip" })
+vim.keymap.set({ "n", "v" }, "X", [["+x]], { desc = "Cut to system clip" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to void" })
 
 -- Dumb ass me
