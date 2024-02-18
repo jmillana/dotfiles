@@ -7,6 +7,9 @@ vim.cmd("set shiftwidth=4")
 -- Normal --
 local maps = vim.api.nvim_set_keymap
 
+-- Utilities
+vim.keymap.set("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Quit" })
+
 -- Plugin Manager
 vim.keymap.set("n", "<leader>Pi", function()
     require("lazy").install()

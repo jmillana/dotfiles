@@ -6,7 +6,12 @@ vim.opt.smartindent = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+local home = os.getenv("HOME") 
+if home == nil then
+    -- Puaj windows
+    home = os.getenv("HOMEPATH")
+end
+vim.opt.undodir = home .. "/.vim/undodir"
 vim.opt.undofile = true
 vim.opt.copyindent = true
 vim.opt.cursorline = true
