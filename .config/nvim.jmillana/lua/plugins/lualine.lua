@@ -1,3 +1,13 @@
+local function get_attached_treesitter()
+    local ts = vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()]
+    if ts == nil then
+        return ""
+    end
+    local get_icon = require("jmillana.utils").get_icon
+    local ts_icon = get_icon("ActiveTS")
+    return string.format("%s TS", ts_icon)
+end
+
 local function get_attached_clients()
     local buf_clients = vim.lsp.get_active_clients({ bufnr = 0 })
     local get_icon = require("jmillana.utils").get_icon
@@ -96,12 +106,18 @@ return {
                     gui = "bold",
                 },
             }
+            local attached_ts = {
+                get_attached_treesitter,
+                color = {
+                    gui = "bold",
+                },
+            }
             require("lualine").setup({
                 options = {
                     theme = "catppuccin-mocha",
                 },
                 sections = {
-                    lualine_x = { "diagnostics", attached_clients },
+                    lualine_x = { attached_clients, attached_ts },
                     lualine_y = { "filetype" },
                     lualine_c = {
                         "lsp_progress",
