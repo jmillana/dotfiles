@@ -17,10 +17,13 @@ return {
 				name = get_icon("ActiveLSP") .. "LSP",
 			},
 			b = {
-				name = get_icon("") .. "Buffers",
+				name = get_icon("Buffers") .. "Buffers",
 			},
 			g = {
-				name = "Go To",
+				name = get_icon("GoTo"), "Go To",
+			},
+			G = {
+				name = get_icon("GitHub") .. "GIT",
 			},
 		}, { prefix = "<leader>" })
 	end,
