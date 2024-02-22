@@ -5,30 +5,29 @@ vim.cmd("set softtabstop=4")
 vim.cmd("set shiftwidth=4")
 
 -- Normal --
-local maps = vim.api.nvim_set_keymap
-
 -- Utilities
 vim.keymap.set("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Quit" })
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
 
 -- Plugin Manager
 vim.keymap.set("n", "<leader>Pi", function()
-    require("lazy").install()
+	require("lazy").install()
 end, { desc = "Plugins Install" })
 
 vim.keymap.set("n", "<leader>Ps", function()
-    require("lazy").home()
+	require("lazy").home()
 end, { desc = "Plugins Status" })
 
 vim.keymap.set("n", "<leader>PS", function()
-    require("lazy").sync()
+	require("lazy").sync()
 end, { desc = "Plugins Sync" })
 
 vim.keymap.set("n", "<leader>Pu", function()
-    require("lazy").check()
+	require("lazy").check()
 end, { desc = "Plugins Check Updates" })
 
 vim.keymap.set("n", "<leader>PU", function()
-    require("lazy").update()
+	require("lazy").update()
 end, { desc = "Plugins Update" })
 
 -- Clipboard settings
@@ -40,6 +39,10 @@ vim.keymap.set({ "n", "v" }, "P", [["+p]], { desc = "Past from system clip" })
 vim.keymap.set({ "n", "v" }, "X", [["+x]], { desc = "Cut to system clip" })
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to void" })
 
+-- Tabs
+vim.keymap.set("v", "<Tab>", ">gv", { desc = "Indent line" })
+vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "Unindent line" })
+
 -- Dumb ass me
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
@@ -48,7 +51,7 @@ vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc =
 
 -- Source file
 vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
+	vim.cmd("so")
 end, { desc = "source file" })
 
 -- Navigation
@@ -66,20 +69,25 @@ vim.keymap.set("n", "n", "nzzzv", { desc = "Move to next match" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Move to previous match" })
 
 vim.keymap.set(
-    "n",
-    "<C-f>",
-    "<cmd>silent !kitty @ launch --type overlay kitty-sessionizer<CR>",
-    { desc = "Open kitty sessionizer" }
+	"n",
+	"<C-f>",
+	"<cmd>silent !kitty @ launch --type overlay kitty-sessionizer<CR>",
+	{ desc = "Open kitty sessionizer" }
 )
 
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix" })
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix" })
-vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location" })
-vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Previous location" })
+-- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix" })
+-- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix" })
+-- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location" })
+-- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Previous location" })
 
 vim.keymap.set(
-    "n",
-    "<leader>s",
-    [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-    { desc = "Search and replace" }
+	"n",
+	"<leader>f",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	{ desc = "[F]ind and replace" }
 )
+
+-- diagnostics
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })

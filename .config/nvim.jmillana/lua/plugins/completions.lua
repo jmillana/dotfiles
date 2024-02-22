@@ -1,60 +1,57 @@
 return {
-    {
+    "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
+    dependencies = {
+        {
+            "l3mon4d3/luasnip",
+            build = (function()
+                if vim.fn.has "win32" == 1 then
+                    return
+                end
+                return "make install_jsregexp"
+            end)(),
+        },
+        "saadparwaiz1/cmp_luasnip",
         "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-path",
+        "rafamadriz/friendly-snippets",
     },
-    {
-        "L3MON4D3/LuaSnip",
-        dependencies = {
-            "saadparwaiz1/cmp_luasnip",
-            "rafamadriz/friendly-snippets",
-        },
-    },
-    {
-        "hrsh7th/nvim-cmp",
-        dependencies = {
-            "hrsh7th/cmp-path",
-        },
-        config = function()
-            local cmp = require("cmp")
-            require("luasnip.loaders.from_vscode").lazy_load()
-
-            cmp.setup({
-                snippet = {
-                    -- REQUIRED - you must specify a snippet engine
-                    expand = function(args)
-                        require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
-                    end,
-                },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ["<Up>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-                    ["<Down>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-                    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-                    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-                    ["<C-e>"] = cmp.mapping.abort(),
-                    ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                    ["<C-CR>"] = cmp.mapping.confirm({ select = true }),
-                }),
-                sources = cmp.config.sources({
-                    { name = "nvim_lsp", priority = 1000 },
-                    { name = "luasnip",  priority = 750 }, -- For luasnip users.
-                    { name = "buffer",   priority = 500 },
-                    { name = "path",     priority = 250 },
-                }),
-            })
-
-            -- Set configuration for specific filetype.
-            cmp.setup.filetype("gitcommit", {
-                sources = cmp.config.sources({
-                    { name = "git" }, -- You can specify the `git` source if [you were installed it](https://github.com/petertriho/cmp-git).
-                }, {
-                    { name = "buffer" },
-                }),
-            })
-        end,
-    },
+    config = function()
+        local cmp = require("cmp")
+        local luasnip = require("luasnip")
+        require("luasnip.loaders.from_vscode").lazy_load()
+        luasnip.config.setup {}
+        cmp.setup {
+            snippet = {
+                expand = function(args)
+                    luasnip.lsp_expand(args.body)
+                end,
+            },
+            completion = {
+                completeopt = "menu,menuone,noinsert,noselect",
+            },
+            mapping = cmp.mapping.preset.insert {
+                ["<C-n>"] = cmp.mapping.select_next_item(),
+                ["<C-p>"] = cmp.mapping.select_prev_item(),
+                ["<C-y>"] = cmp.mapping.confirm { select = true },
+                ["<C-Space>"] = cmp.mapping.complete(),
+                ["<C-l>"] = cmp.mapping(function()
+                    if luasnip.expand_or_locally_jumpable() then
+                        luasnip.expand_or_jump()
+                    end
+                end, {"i", "s"}),
+                ["<C-h>"] = cmp.mapping(function()
+                    if luasnip.locally_jumpable(-1) then
+                        luasnip.jump(-1)
+                    end
+                end, {"i", "s"}),
+            },
+            sources = {
+                { name = "nvim_lsp" },
+                { name = "luasnip" },
+                { name = "path" },
+            },
+        }
+        
+    end,
 }

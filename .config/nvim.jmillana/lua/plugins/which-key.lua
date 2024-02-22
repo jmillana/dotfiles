@@ -7,23 +7,38 @@ return {
 		local wk = require("which-key")
 		local get_icon = require("jmillana.utils").get_icon
 		wk.register({
+		    r = {
+		        name = "[R]eplace",
+		    },
+		    c = {
+		        name = "[C]ode",
+		    },
+		    d = {
+		        name = "[D]ocument",
+		    },
+		    t = {
+		        name = "[T]oggle",
+		    },
+		    w = {
+                name = "[W]orkspace"
+		    },
 			P = {
-				name = get_icon("Plugins") .. "Plugins",
+				name = get_icon("Plugins") .. "[P]lugins",
 			},
-			f = {
-				name = get_icon("Search") .. "Find",
+			s = {
+				name = get_icon("Search") .. "[S]earch",
 			},
 			l = {
-				name = get_icon("ActiveLSP") .. "LSP",
+				name = get_icon("ActiveLSP") .. "[L]SP",
 			},
 			b = {
-				name = get_icon("Buffers") .. "Buffers",
+				name = get_icon("Buffers") .. "[B]uffers",
 			},
 			g = {
-				name = get_icon("GoTo"), "Go To",
+				name = get_icon("GoTo"), "[G]o To",
 			},
 			G = {
-				name = get_icon("GitHub") .. "GIT",
+				name = get_icon("GitHub") .. "[G]IT",
 			},
 		}, { prefix = "<leader>" })
 	end,

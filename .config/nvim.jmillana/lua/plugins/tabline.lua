@@ -52,9 +52,9 @@ return {
 		maps("n", "<leader>b8", "<Cmd>BufferGoto 8<CR>", {desc= "Jump to buffer 8"})
 		maps("n", "<leader>b9", "<Cmd>BufferGoto 9<CR>", {desc= "Jump to buffer 9"})
 		maps("n", "<leader>b0", "<Cmd>BufferLast<CR>", {desc= "Jump to last"})
-		maps("n", "<A-p>", "<Cmd>BufferPin<CR>", {desc= "Pin Buffer"} )
-		maps("n", "<A-c>", "<Cmd>BufferClose<CR>", {desc= "Close buffer"})
-		maps("n", "<C-p>", "<Cmd>BufferPick<CR>", {desc= "Jump to buffer 1"})
+		maps("n", "<leader>bp", "<Cmd>BufferPin<CR>", {desc= "Pin Buffer"} )
+		maps("n", "<leader>bc", "<Cmd>BufferClose<CR>", {desc= "Close buffer"})
+		maps("n", "<leader>bP", "<Cmd>BufferPick<CR>", {desc= "Jump to buffer 1"})
 	end,
 	opts = {
 		-- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
