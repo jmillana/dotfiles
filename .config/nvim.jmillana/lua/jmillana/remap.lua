@@ -1,13 +1,14 @@
 vim.g.mapleader = " "
 
-vim.cmd("set tabstop=4")
-vim.cmd("set softtabstop=4")
-vim.cmd("set shiftwidth=4")
+-- diagnostics
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Normal --
 -- Utilities
-vim.keymap.set("n", "<leader>q", "<cmd>confirm q<cr>", { desc = "Quit" })
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "Save" })
+vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "[W]rite changes" })
 
 -- Plugin Manager
 vim.keymap.set("n", "<leader>Pi", function()
@@ -56,8 +57,8 @@ end, { desc = "source file" })
 
 -- Navigation
 -- Arrow keys keep in the middle of the page
-vim.keymap.set("n", "<Up>", "kzz", { desc = "Move up" })
-vim.keymap.set("n", "<Down>", "jzz", { desc = "Move down" })
+-- vim.keymap.set("n", "<Up>", "kzz", { desc = "Move up" })
+-- vim.keymap.set("n", "<Down>", "jzz", { desc = "Move down" })
 
 vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
 vim.keymap.set("v", "J", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
@@ -86,8 +87,3 @@ vim.keymap.set(
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "[F]ind and replace" }
 )
-
--- diagnostics
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })

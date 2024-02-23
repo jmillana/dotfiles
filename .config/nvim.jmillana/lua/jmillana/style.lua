@@ -26,7 +26,7 @@ vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 999
 vim.opt.colorcolumn = "100"
 
 -- Preview substitution
@@ -35,6 +35,7 @@ vim.opt.inccommand = "split"
 -- Decrease update time
 vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
+vim.opt.confirm = true
 
 -- Clear highlighting on pressing Escape
 vim.keymap.set("n", "<Esc>", "<esc>:nohlsearch<CR>", { silent = true })
