@@ -7,7 +7,9 @@ return {
 
 		-- Additional lua configuration, makes nvim stuff amazing!
 		"folke/neodev.nvim",
+		-- Add spinners
 		{ "j-hui/fidget.nvim", opts = {} },
+		-- Format on save
 		{
 			"stevearc/conform.nvim",
 			opts = {
@@ -50,39 +52,38 @@ return {
 				-- Show the signature of the function you're currently completing.
 				map("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 
-				-- local client = vim.lsp.get_client_by_id(event.data.client_id)
-				-- if client and client.server_capabilities.
 				-- Highligh references of the word under the cursor
-				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-					buffer = event.buf,
-					callback = vim.lsp.buf.document_highlight,
-				})
-				vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-					buffer = event.buf,
-					callback = vim.lsp.buf.clear_references,
-				})
+				local client = vim.lsp.get_client_by_id(event.data.client_id)
+				if client and client.server_capabilities.documentHighlightProvider then
+					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+						buffer = event.buf,
+						callback = vim.lsp.buf.document_highlight,
+					})
+					vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+						buffer = event.buf,
+						callback = vim.lsp.buf.clear_references,
+					})
+				end
 			end,
 		})
 
 		local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-		-- local lspconfig = require("lspconfig")
 		local servers = {
-			-- pyright = {
-			--     settings = {
-			--         autoImportCompletion = true,
-			--         python = {
-			--             analysis = {
-			--                 autoSearchPaths = true,
-			--                 diagnosticMode = "openFilesOnly",
-			--                 useLibraryCodeForTypes = true,
-			--             },
-			--         },
-			--     },
-			-- },
+			pyright = {
+				settings = {
+					autoImportCompletion = true,
+					python = {
+						analysis = {
+							autoSearchPaths = true,
+							useLibraryCodeForTypes = true,
+						},
+					},
+				},
+			},
 		}
 		-- Ensure servers are installed
 		require("mason").setup()
-		local installed = { "lua_ls", "biome", "ruff-lsp", "rust_analyzer", "terraformls" }
+		local installed = { "lua_ls", "biome", "rust_analyzer", "terraformls", "pyright" }
 		vim.list_extend(installed, vim.tbl_keys(servers))
 		require("mason-tool-installer").setup({
 			ensure_installed = installed,
@@ -92,53 +93,12 @@ return {
 			handlers = {
 				function(server_name)
 					local server = servers[server_name] or {}
-					require("lspconfig")[server_name].setup({
-						cmd = server.cmd,
-						settings = server.settings,
-						filetypes = server.filetypes,
-						on_attach = on_attach,
-						-- TODO: Think about what we wanna do here.
-						-- capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities),
-						capabilities = server.capabilities or capabilities,
-					})
+					server.capabilites = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+					require("lspconfig")[server_name].setup(server)
 				end,
 			},
 		})
 
-		-- vim.api.nvim_create_autocmd("LspAttach", {
-		-- 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-		-- 	callback = function(ev)
-		-- 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to declaration" })
-		-- 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
-		-- 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
-		-- 		vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Search references forwards" })
-		-- 		vim.keymap.set("n", "lk", vim.lsp.buf.hover, { desc = "Hover Documentation" })
-		-- 		vim.keymap.set("n", "k", vim.lsp.buf.hover, { desc = "Hover Documentation" })
-		--
-		-- 		-- Hover diagnostics in the current currsor location
-		-- 		vim.keymap.set("n", "<leader>ld", function()
-		-- 			vim.diagnostic.open_float()
-		-- 		end, { desc = "Hover diagnostics over current location" })
-		--
-		-- 		-- Hover all the diagnostics
-		-- 		vim.keymap.set("n", "<leader>lD", function()
-		-- 			require("telescope.builtin").diagnostics()
-		-- 		end, { desc = "Search all diagnostics" })
-		-- 		vim.keymap.set("n", "ls", vim.lsp.buf.signature_help, { desc = "Hover Signature" })
-		-- 		vim.keymap.set({ "n", "v" }, "<leader>la", vim.lsp.buf.code_action, { desc = "Code Actions" })
-		-- 		vim.keymap.set("n", "<leader>F", function()
-		-- 			vim.lsp.buf.format({ async = true })
-		-- 		end, { desc = "Format buffer" })
-		-- 		vim.keymap.set("n", "<leader>lf", function()
-		-- 			vim.lsp.buf.format({ async = true })
-		-- 		end, { desc = "Format buffer" })
-		-- 	end,
-		-- })
-		-- -- Mason info
-		-- vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<cr>", { desc = "LSP information" })
-		--
-		-- -- NONE LS Info
-		-- vim.keymap.set("n", "<leader>lI", "<cmd>NullLsInfo<cr>", { desc = "Null-ls information" })
 		local sign = function(opts)
 			vim.fn.sign_define(opts.name, {
 				texthl = opts.name,

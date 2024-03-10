@@ -32,13 +32,13 @@ vim.keymap.set("n", "<leader>PU", function()
 end, { desc = "Plugins Update" })
 
 -- Clipboard settings
-vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "Yank to system clip" })
-vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "Past from system clip" })
-vim.keymap.set({ "n", "v" }, "<leader>x", [["+x]], { desc = "Cut to system clip" })
-vim.keymap.set({ "n", "v" }, "Y", [["+y]], { desc = "Yank to system clip" })
-vim.keymap.set({ "n", "v" }, "P", [["+p]], { desc = "Past from system clip" })
-vim.keymap.set({ "n", "v" }, "X", [["+x]], { desc = "Cut to system clip" })
-vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to void" })
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]], { desc = "[Y]ank to system clip" })
+vim.keymap.set({ "n", "v" }, "<leader>p", [["+p]], { desc = "[P]aste from system clip" })
+vim.keymap.set({ "n", "v" }, "<leader>x", [["+x]], { desc = "Cut[X] to system clip" })
+vim.keymap.set({ "n", "v" }, "Y", [["+y]], { desc = "[Y]ank to system clip" })
+vim.keymap.set({ "n", "v" }, "P", [["+p]], { desc = "[P]aste from system clip" })
+vim.keymap.set({ "n", "v" }, "X", [["+x]], { desc = "Cut[X] to system clip" })
+vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]], { desc = "[D]elete to void" })
 
 -- Tabs
 vim.keymap.set("v", "<Tab>", ">gv", { desc = "Indent line" })
@@ -48,12 +48,12 @@ vim.keymap.set("v", "<S-Tab>", "<gv", { desc = "Unindent line" })
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
 -- Set executable
-vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make file executable" })
+vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make file e[X]ecutable" })
 
 -- Source file
 vim.keymap.set("n", "<leader><leader>", function()
 	vim.cmd("so")
-end, { desc = "source file" })
+end, { desc = "source file [ ]" })
 
 -- Navigation
 -- Arrow keys keep in the middle of the page
