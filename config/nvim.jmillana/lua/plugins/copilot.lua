@@ -7,11 +7,11 @@ return {
 		require("copilot").setup({
 			panel = {
 				enabled = true,
-				auto_refresh = false,
+				auto_refresh = true,
 				keymap = {
-					jump_prev = "<C-p>",
-					jump_next = "<C-n>",
-					accept = "<C-y>",
+					jump_prev = "<M-p>",
+					jump_next = "<M-n>",
+					accept = "<M-y>",
 					refresh = "gr",
 					open = "<M-CR>",
 					close = "<Esc>",
@@ -23,19 +23,18 @@ return {
 			},
 			suggestion = {
 				enabled = true,
-				auto_trigger = false,
+				auto_trigger = true,
 				debounce = 75,
 				keymap = {
-					accept = "<C-y>",
+					accept = "<M-y>",
 					accept_word = false,
 					accept_line = false,
-					next = "<C-n>",
-					prev = "<C-p>",
-					dismiss = "<C-d>",
+					next = "<M-n>",
+					prev = "<M-p>",
+					dismiss = "<M-d>",
 				},
 			},
 			filetypes = {
-				yaml = false,
 				markdown = false,
 				help = false,
 				gitcommit = false,
