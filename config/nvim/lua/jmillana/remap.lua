@@ -62,8 +62,11 @@ vim.keymap.set("n", "<Down>", "jzz", { desc = "Move down" })
 
 vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
 vim.keymap.set("v", "J", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
+vim.keymap.set("v", "<S-Down>", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
+vim.keymap.set("v", "<S-Up>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join line below" })
+vim.keymap.set("n", "<S-Down>", "mzJ`z", { desc = "Join line below" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Scroll down" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Scroll up" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Move to next match" })
