@@ -1,7 +1,13 @@
+if vim.fn.has("win32") == 1 then
+	vim.opt.shell = "powershell.exe"
+	vim.g.python3_host_prog = "C:\\Users\\Jordi\\.pyenv\\pyenv-win\\versions\\3.12.2\\python.exe"
+	vim.g.python3_host_prog = "~\\.pyenv\\versions\\nvim\\bin\\python3"
+else
+	vim.g.python3_host_prog = "~/.pyenv/versions/nvim/bin/python3"
+end
 vim.g.mapleader = " "
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-vim.g.python3_host_prog = "~/.pyenv/versions/nvim/bin/python3"
--- vim.g.python3_host_prog = "~/.pyenv/versions/3.8.10/bin/python3"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
