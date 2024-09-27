@@ -6,6 +6,10 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagn
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
+-- Insert mode
+vim.keymap.set("i", "<C-Del>", "<C-O>dw", { desc = "Delete word" })
+vim.keymap.set("n", "<C-Del>", "dw", { desc = "Delete word" })
+
 -- Normal --
 -- Utilities
 vim.keymap.set("n", "<leader>w", "<cmd>w<cr>", { desc = "[W]rite changes" })
