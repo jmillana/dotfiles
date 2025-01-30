@@ -18,7 +18,7 @@ return {
 					lua = { "stylua" },
 					python = { "isort", "black" },
 					javascript = { "prettier", "eslint" },
-					jabascriptreact = { "prettier", "eslint" },
+					javascriptreact = { "prettier", "eslint" },
 				},
 			},
 		},
@@ -72,6 +72,7 @@ return {
 				settings = {
 					autoImportCompletion = true,
 					python = {
+						pythonPath = vim.fn.trim(vim.fn.system("poetry env info --path")) .. "/bin/python",
 						analysis = {
 							autoSearchPaths = true,
 							useLibraryCodeForTypes = true,

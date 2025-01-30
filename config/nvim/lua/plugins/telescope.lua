@@ -19,6 +19,10 @@ return {
 						n = { ["<c-t>"] = open_with_trouble },
 					},
 				},
+				find_files = {
+					hidden = true,
+					ignore_patterns = { "node_modules", ".git" },
+				},
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
@@ -51,6 +55,12 @@ return {
 					previewer = false,
 				}))
 			end, { desc = "[/] Fuzzily search in current buffer" })
+
+			vim.keymap.set("n", "<leader>sF", function()
+				builtin.find_files({
+					hidden = true,
+				})
+			end, { desc = "[S]earch [F]iles (include hidden)" })
 
 			vim.keymap.set("n", "<leader>so", function()
 				builtin.live_grep({

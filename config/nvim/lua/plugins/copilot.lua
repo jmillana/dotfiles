@@ -36,7 +36,8 @@ return {
 					},
 				},
 				filetypes = {
-					markdown = false,
+					markdown = true,
+					yaml = true,
 					help = false,
 					gitcommit = false,
 					gitrebase = false,
