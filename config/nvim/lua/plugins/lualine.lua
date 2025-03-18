@@ -114,6 +114,7 @@ return {
 					theme = vim.g.colors_name,
 				},
 				sections = {
+					lualine_a = { { "pipeline", icon = " " } },
 					lualine_x = { attached_clients, attached_ts },
 					lualine_y = { "filetype" },
 					lualine_c = {

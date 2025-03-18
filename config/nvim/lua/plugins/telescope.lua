@@ -32,6 +32,7 @@ return {
 			-- Enable telescope fzf native, if installed
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
+			pcall(require("telescope").load_extension, "find_template")
 
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
@@ -75,6 +76,11 @@ return {
 					cwd = vim.fn.stdpath("config"),
 				})
 			end, { desc = "[S]earch [N]eovim files" })
+
+			-- Shortcut for searching templates
+			vim.keymap.set("n", "<leader>st", function()
+				vim.cmd("Telescope find_template")
+			end, { desc = "[S]earch [T]emplates" })
 		end,
 	},
 }

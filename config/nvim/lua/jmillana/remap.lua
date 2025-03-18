@@ -88,9 +88,14 @@ vim.keymap.set(
 -- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location" })
 -- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Previous location" })
 
+-- Select the current word for replacment
 vim.keymap.set(
 	"n",
 	"<leader>f",
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
 	{ desc = "[F]ind and replace" }
 )
+-- Select the current visual selection for replacement
+vim.keymap.set("v", "<leader>f", '"hy:%s/<C-r>h//gI<left><left><left>', { noremap = true, silent = false })
+-- Select the current visual selection for replacement with confirmation
+vim.keymap.set("v", "<leader>F", '"hy:%s/<C-r>h//gIc<left><left><left><left>', { noremap = true, silent = false })

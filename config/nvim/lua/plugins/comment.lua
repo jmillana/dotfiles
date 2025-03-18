@@ -6,7 +6,7 @@ return {
 		opts = {},
 		config = function()
 			require("todo-comments").setup({})
-			vim.keymap.set("n", "<leader>st", function()
+			vim.keymap.set("n", "<leader>sT", function()
 				vim.cmd("TodoTelescope")
 			end, { desc = "[S]earch [T]odo" })
 		end,
